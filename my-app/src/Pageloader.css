@@ -1,0 +1,143 @@
+/* ── FULL PAGE LOADER ── */
+.page-loader {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: #080e1aee;
+  backdrop-filter: blur(6px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: loaderFadeIn 0.2s ease;
+}
+
+@keyframes loaderFadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.loader-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+/* ── RINGS ── */
+.loader-ring-wrapper {
+  position: relative;
+  width: 100px;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.loader-ring {
+  position: absolute;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  animation: spin linear infinite;
+}
+
+.loader-ring.outer {
+  width: 100px;
+  height: 100px;
+  border-top-color: #00e5ff;
+  border-right-color: #00e5ff30;
+  animation-duration: 1.2s;
+  box-shadow: 0 0 20px #00e5ff30;
+}
+
+.loader-ring.middle {
+  width: 72px;
+  height: 72px;
+  border-top-color: #00ffb3;
+  border-left-color: #00ffb330;
+  animation-duration: 0.9s;
+  animation-direction: reverse;
+}
+
+.loader-ring.inner {
+  width: 46px;
+  height: 46px;
+  border-top-color: #00e5ff80;
+  border-bottom-color: #00e5ff20;
+  animation-duration: 0.6s;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ── CENTER ICON ── */
+.loader-icon {
+  font-size: 20px;
+  animation: iconPulse 1.5s ease-in-out infinite;
+  z-index: 1;
+}
+
+@keyframes iconPulse {
+  0%, 100% { transform: scale(1);   opacity: 1; }
+  50%       { transform: scale(1.1); opacity: 0.7; }
+}
+
+/* ── MESSAGE ── */
+.loader-message {
+  font-family: 'Space Mono', monospace;
+  font-size: 12px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #5a7394;
+}
+
+/* ── DOTS ── */
+.loader-dots {
+  display: flex;
+  gap: 6px;
+}
+
+.loader-dots span {
+  width: 5px;
+  height: 5px;
+  background: #00e5ff;
+  border-radius: 50%;
+  animation: dotBounce 1.2s ease-in-out infinite;
+}
+
+.loader-dots span:nth-child(2) { animation-delay: 0.2s; background: #00ffb3; }
+.loader-dots span:nth-child(3) { animation-delay: 0.4s; background: #00e5ff80; }
+
+@keyframes dotBounce {
+  0%, 80%, 100% { transform: scale(0.6); opacity: 0.4; }
+  40%           { transform: scale(1);   opacity: 1; }
+}
+
+/* ── INLINE BUTTON SPINNER (reusable) ── */
+.btn-spinner {
+  width: 16px;
+  height: 16px;
+  border: 2px solid transparent;
+  border-top-color: currentColor;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+  display: inline-block;
+  flex-shrink: 0;
+}
+
+/* ── TOP PROGRESS BAR ── */
+.progress-bar {
+  position: fixed;
+  top: 0; left: 0;
+  height: 2px;
+  background: linear-gradient(90deg, #00e5ff, #00ffb3);
+  box-shadow: 0 0 8px #00e5ff;
+  z-index: 9998;
+  animation: progressSlide 1.5s ease-in-out infinite;
+}
+
+@keyframes progressSlide {
+  0%   { width: 0%;   left: 0; }
+  50%  { width: 70%;  left: 0; }
+  100% { width: 100%; left: 0; opacity: 0; }
+}
