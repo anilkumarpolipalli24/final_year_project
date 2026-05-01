@@ -79,7 +79,7 @@ export default function App() {
   // ════ SESSION ════
   const clearTimers = () => { clearTimeout(expiryRef.current); clearTimeout(warnRef.current); };
   const resetState  = useCallback((msg="") => {
-    clearTimers(); setToken(null); setRole(null); setUserName(null); setUserId(null);
+    clearTimers(); setToken(null); setRole(null); setUserName(null);
     setStats(null); setSessWarn(false); if (msg) setExpMsg(msg);
   }, []);
 
@@ -184,7 +184,7 @@ export default function App() {
   useEffect(() => { if (token) fetchStats(); }, [token]);
 
   // ════ ACTIONS ════
-  const logout = () => { setLoading(true); setTimeout(() => { resetState(); setLoading(false); }, 500); };
+  const logout = () => { setTimeout(() => { resetState(); }, 500); };
 
   const checkIntegrity = async () => {
     if (!token) return; setBusy(true); setIntegrityRes(null);
@@ -251,7 +251,7 @@ export default function App() {
   return (
     <Login
       expiredMessage={expMsg}
-      onLogin={(t, r, n, uid) => {
+      onLogin={(t, r, n) => {
         setExpMsg("");
         setTimeout(() => {
           setToken(t);
