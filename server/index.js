@@ -33,8 +33,12 @@ const User       = require("./models/User");        // ← Renamed from user.js
 const PORT      = parseInt(process.env.NODE_PORT || process.env.PORT || "5000");
 const MY_URL    = process.env.MY_URL   || `http://localhost:${PORT}`;
 const PEERS_ENV = process.env.PEERS    || "";
-const MONGO_URI = process.env.MONGO_URI ||
-  "mongodb+srv://durgaraopolipalli24:Anil6780@cluster0.qzhjw1h.mongodb.net/blockaudit_edu?appName=Cluster0";
+const MONGO_URI = process.env.MONGO_URI;
+
+if (!MONGO_URI) {
+  console.error("❌ MONGO_URI is missing");
+  process.exit(1);
+}
 const INITIAL_PEERS = PEERS_ENV.split(",").map(s => s.trim()).filter(Boolean);
 
 // ── Express ──
@@ -476,7 +480,7 @@ function startServer() {
   app.listen(PORT, () => {
     console.log(`\n╔══════════════════════════════════════════════════════╗`);
     console.log(`║  🎓 BlockAudit University Edition v3.0               ║`);
-    console.log(`║  URL   : http://localhost:${PORT}                        ║`);
+    console.log(`║  URL   : ${MY_URL}                        ║`);
     console.log(`║  Atlas : ✅ Connected                                 ║`);
     console.log(`║  Email : ${process.env.EMAIL_PASS ? "✅ Gmail SMTP ready" : "⚠  Add EMAIL_PASS to .env"}                    ║`);
     console.log(`║  OTP   : ${process.env.DEV_MODE==="true" ? "🔧 DEV MODE — shown in browser" : "📧 Email only"}                ║`);
