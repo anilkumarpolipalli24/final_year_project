@@ -17,7 +17,6 @@ export default function App() {
   const [token,    setToken]    = useState<string|null>(null);
   const [role,     setRole]     = useState<string|null>(null);
   const [userName, setUserName] = useState<string|null>(null);
-  const [userId,   setUserId]   = useState<string|null>(null);
   const [expMsg,   setExpMsg]   = useState("");
   const [sessWarn, setSessWarn] = useState(false);
   const expiryRef = useRef<any>(null);
@@ -26,7 +25,6 @@ export default function App() {
   // ── UI state
   const [tab,     setTab]    = useState<Tab>("dashboard");
   const [busy,    setBusy]   = useState(false);
-  const [loading, setLoading]= useState(false);
 
   // ── Dashboard
   const [stats,      setStats]     = useState<any>(null);
