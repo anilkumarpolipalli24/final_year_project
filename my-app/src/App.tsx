@@ -184,8 +184,11 @@ export default function App() {
   useEffect(() => { if (token) fetchStats(); }, [token]);
 
   // ════ ACTIONS ════
-  const logout = () => { setLoading(true); setTimeout(() => { resetState(); setLoading(false); }, 500); };
-
+const logout = () => {
+  setTimeout(() => {
+    resetState();
+  }, 500);
+};
   const checkIntegrity = async () => {
     if (!token) return; setBusy(true); setIntegrityRes(null);
     try { const r = await axios.get(`${API}/validateChain`, H(token)); setIntegrityRes(r.data); fetchStats(); }
@@ -249,8 +252,14 @@ export default function App() {
   // ════ NOT LOGGED IN ════
   if (!token) {
     return <Login expiredMessage={expMsg}
-      onLogin={(t,r,n,uid) => { setExpMsg(""); setLoading(true); setTimeout(()=>{ setToken(t); setRole(r); setUserName(n); setUserId(uid); setLoading(false); },700); }} />;
-  }
+      onLogin={(t,r,n,uid) => {
+  setExpMsg("");
+  setTimeout(()=>{
+    setToken(t);
+    setRole(r);
+    setUserName(n);
+  },700);
+}}
 
   return (
     <div className="layout">
