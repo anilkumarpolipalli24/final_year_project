@@ -1,7 +1,4 @@
 "use strict";
-// server/models/User.js
-// Place this file in: server/models/User.js
-// (DELETE the old server/models/user.js after placing this)
 const mongoose = require("mongoose");
 const bcrypt   = require("bcryptjs");
 
