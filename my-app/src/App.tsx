@@ -3,7 +3,7 @@ import axios from "axios";
 import "./App.css";
 import Login from "./Login";
 
-const API = "http://localhost:5000";
+const API = import.meta.env.VITE_API_URL;
 const H   = (t: string) => ({ headers: { Authorization: `Bearer ${t}` } });
 
 function parseJwt(t: string): { exp?: number } {
